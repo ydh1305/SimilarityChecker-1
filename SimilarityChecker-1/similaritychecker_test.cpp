@@ -3,34 +3,34 @@
 
 using namespace testing;
 
-TEST(SimilarityChecker, SameLengthReturns60)
+class SimilarityCheckerFixture : public Test {
+protected:
+	SimilarityChecker similaritychecker;
+};
+
+TEST_F(SimilarityCheckerFixture, SameLengthReturns60)
 {
-	SimilarityChecker checker;
-	EXPECT_EQ(60, checker.checkLength("ASD", "DSA"));
+	EXPECT_EQ(60, similaritychecker.checkWordLength("ASD", "DSA"));
 }
 
-TEST(SimilarityChecker, TwiceOrMoreLengthDiffReturns0)
+TEST_F(SimilarityCheckerFixture, TwiceOrMoreLengthDiffReturns0)
 {
-	SimilarityChecker checker;
-	EXPECT_EQ(0, checker.checkLength("A", "BB"));
+	EXPECT_EQ(0, similaritychecker.checkWordLength("A", "BB"));
 }
 
-TEST(SimilarityChecker, PartialScore_AAABB_and_BAA)
+TEST_F(SimilarityCheckerFixture, PartialScore_AAABB_and_BAA)
 {
-	SimilarityChecker checker;
-	EXPECT_EQ(20, checker.checkLength("AAABB", "BAA"));
+	EXPECT_EQ(20, similaritychecker.checkWordLength("AAABB", "BAA"));
 }
 
-TEST(SimilarityChecker, PartialScore_AA_and_AAE)
+TEST_F(SimilarityCheckerFixture, PartialScore_AA_and_AAE)
 {
-	SimilarityChecker checker;
-	EXPECT_EQ(30, checker.checkLength("AA", "AAE"));
+	EXPECT_EQ(30, similaritychecker.checkWordLength("AA", "AAE"));
 }
 
-TEST(SimilarityChecker, IdenticalStringsReturns60)
+TEST_F(SimilarityCheckerFixture, IdenticalStringsReturns60)
 {
-	SimilarityChecker checker;
-	EXPECT_EQ(60, checker.checkLength("ABCDE", "ABCDE"));
+	EXPECT_EQ(60, similaritychecker.checkWordLength("ABCDE", "ABCDE"));
 }
 
 int main() {
